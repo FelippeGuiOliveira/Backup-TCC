@@ -40,18 +40,17 @@ span {
 }
 
 #userwayAccessibilityIcon {
-    left: 10px !important;
+    left: 5px !important;
     right: auto !important;
-    top: 40% !important;
-    transform: translateY(-50%) !important;
+    top: 60% !important;
     position: fixed !important;
     z-index: 10 !important;
 }
 
 div[vw] {
     position: fixed !important;
-    top: 50% !important;
-    left: 0px !important;
+    top: 60% !important;
+    left: 10px !important;
     right: auto !important;
     transform: translateY(-50%) !important;
     z-index: 10 !important;
