@@ -40,7 +40,7 @@ span {
 }
 
 #userwayAccessibilityIcon {
-    left: 5px !important;
+    left: 10px !important;
     right: auto !important;
     top: 60% !important;
     position: fixed !important;
