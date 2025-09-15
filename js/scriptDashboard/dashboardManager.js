@@ -1,16 +1,7 @@
-/**
- * @file Gerenciador central para os dashboards.
- * Lida com o carregamento, salvamento e exclusão de dados,
- * além de atualizar a interface do usuário (gráficos e resumos).
- */
-
 import { charts } from './initDashboards.js';
 
-// --- Estado e Constantes ---
-let db = {}; // O nosso "banco de dados" em memória.
+let db = {};
 const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-
-// --- Funções do "Banco de Dados" ---
 
 /** Carrega os dados do localStorage para a memória. */
 function loadFromStorage() {
@@ -45,7 +36,7 @@ function getYearData(year) {
 // --- Funções de Atualização da Interface ---
 
 /**
- * Atualiza todos os gráficos e cards de resumo com base nos dados de uma data.
+ *  Atualiza todos os gráficos e cards de resumo com base nos dados de uma data.
  */
 function updateUI(year, monthName) {
     const monthData = getMonthData(year, monthName);
@@ -119,14 +110,14 @@ export function initDashboardManager() {
     yearInput.value = today.getFullYear();
     updateUI(yearInput.value, monthNames[monthSelect.value]);
 
-    // Listener para mudança de data
+    // Mudança de data
     const handleDateChange = () => {
         updateUI(yearInput.value, monthNames[parseInt(monthSelect.value)]);
     };
     monthSelect.addEventListener('change', handleDateChange);
     yearInput.addEventListener('change', handleDateChange);
 
-    // Listener para o botão de salvar
+    // Botão de salvar
     saveBtn.addEventListener('click', () => {
         const year = yearInput.value;
         const monthName = monthNames[parseInt(monthSelect.value)];
@@ -176,10 +167,10 @@ export function initDashboardManager() {
         document.getElementById('dashboards')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // Listener para os botões de deletar
+    // Botões de deletar
     clearButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-            const chartKey = event.currentTarget.dataset.chart; // 'energy', 'water', etc.
+            const chartKey = event.currentTarget.dataset.chart;
             const year = yearInput.value;
             const monthName = monthNames[parseInt(monthSelect.value)];
 
@@ -203,7 +194,7 @@ export function initDashboardManager() {
         });
     });
 
-    // Listener para os botões de deletar o ano inteiro (ex: água)
+    // Listener para os botões de deletar o ano inteiro
     clearYearButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const chartKey = event.currentTarget.dataset.chart;
@@ -212,7 +203,6 @@ export function initDashboardManager() {
             if (chartKey === 'water') {
                 if (confirm(`Tem certeza que deseja limpar TODOS os dados de água do ano de ${year}?`)) {
                     if (db[year]) {
-                        // Itera sobre todos os meses do ano e reseta os dados de água
                         Object.keys(db[year]).forEach(monthName => {
                             db[year][monthName].agua = { consumoReal: 0, consumoTotal: 0, custoTotal: 0, valorEconomizado: 0 };
                         });

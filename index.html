@@ -40,7 +40,7 @@
       <button class="hamburger" id="hamburger-btn" aria-label="Abrir menu">
         <i class="fas fa-bars"></i>
       </button>
-      
+
       <div class="profile-card">
         <div class="profile-card-header">
           <div class="avatar">
@@ -228,26 +228,14 @@
     </div>
   </section> -->
 
-  <!-- CTA Final -->
-  <section class="cta" id="cta">
-    <div class="cta-container">
-      <h2>Pronto para Transformar sua Gestão ESG?</h2>
-      <p>Comece hoje mesmo a monitorar e otimizar os indicadores de sustentabilidade da sua empresa.</p>
-
-      <div class="cta-buttons">
-        <a href="html/ferramentas.html" class="btn-cta-primary">Começar Agora</a>
-        <a href="#" class="btn-cta-secondary">Falar com Especialista</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ESG Showcase Section -->
   <section class="esg-showcase">
     <div class="esg-showcase-content">
       <h2>Acesse aonde estiver</h2>
       <h3>Dúvidas na sua jornada ESG?</h3>
       <p>
-        Nossa aplicação web funciona no celular, tablet e computador. Você tem acesso aonde estiver. Comece hoje mesmo a utilizar plataforma completa para monitoramento e gestão de metas ESG!
+        Nossa aplicação web funciona no celular, tablet e computador. Você tem acesso aonde estiver. Comece hoje mesmo a
+        utilizar plataforma completa para monitoramento e gestão de metas ESG!
       </p>
       <a href="html/contato.html" class="btn-esg-showcase">Fale com um especialista</a>
     </div>
@@ -273,11 +261,70 @@
     </div>
   </section>
 
-  <!-- Inicialização dos Carrosséis -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script type="module" src="js/mainScript.js" defer></script>
+  <!-- Seção de Preços -->
+  <section class="pricing" id="precos">
+    <div class="pricing-container">
+      <h2>Planos e Preços</h2>
+      <p class="subtitle">Escolha o plano ideal para transformar a gestão de sustentabilidade da sua empresa.</p>
+      <div class="pricing-cards-wrapper">
+        <!-- Plano Mensal -->
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Licença Mensal</h3>
+            <p>Flexibilidade para começar agora, sem compromisso anual.</p>
+          </div>
+          <div class="price">
+            R$ 120,00<span>/mês</span>
+          </div>
+          <div class="payment-options">
+            <p>&nbsp;</p> <!-- Espaço para alinhar com o outro card -->
+          </div>
+          <ul class="features-list">
+            <li><i class="fas fa-check"></i> Calculadoras de Impacto</li>
+            <li><i class="fas fa-check"></i> Dashboards Interativos</li>
+            <li><i class="fas fa-check"></i> Relatórios ESG Completos</li>
+            <li><i class="fas fa-check"></i> Assistente com IA</li>
+            <li><i class="fas fa-check"></i> Definição de Metas</li>
+            <li><i class="fas fa-check"></i> Suporte via e-mail</li>
+          </ul>
+          <a href="html/checkout.html" class="btn-pricing">Adquirir Licença</a>
+        </div>
+        <!-- Plano Anual (Recomendado) -->
+        <div class="pricing-card recommended">
+          <div class="badge">Mais Popular</div>
+          <div class="pricing-header">
+            <h3>Licença Anual</h3>
+            <p>Economize 20% com nosso plano mais completo e vantagens exclusivas.</p>
+          </div>
+          <div class="price">
+            R$ 1.200,00<span>/ano</span>
+          </div>
+          <div class="payment-options">
+            <p>Equivalente a <strong>R$ 100,00/mês</strong></p>
+          </div>
+          <ul class="features-list">
+            <li><i class="fas fa-check"></i> Tudo do plano Mensal, e mais:</li>
+            <li><i class="fas fa-check"></i> Suporte Prioritário</li>
+            <li><i class="fas fa-check"></i> Acesso antecipado a novos recursos</li>
+          </ul>
+          <a href="html/checkout.html" class="btn-pricing">Adquirir Licença</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script src="./js/carrossel.js"></script> 
+  <!-- CTA Final -->
+  <section class="cta" id="cta">
+    <div class="cta-container">
+      <h2>Pronto para Transformar sua Gestão ESG?</h2>
+      <p>Comece hoje mesmo a monitorar e otimizar os indicadores de sustentabilidade da sua empresa.</p>
+
+      <div class="cta-buttons">
+        <a href="html/ferramentas.html" class="btn-cta-primary">Começar Agora</a>
+        <a href="#" class="btn-cta-secondary">Falar com Especialista</a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer id="contato">
@@ -338,6 +385,11 @@
     </div>
   </footer>
 
+  <!-- Inicialização dos Carrosséis -->
+  <!-- Carrossel das ferramentas -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/carrossel.js"></script>
+  <!-- Carrossel Principal -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script type="module" src="js/mainScript.js" defer></script>
   <!-- Widget de Acessibilidade UserWay -->
