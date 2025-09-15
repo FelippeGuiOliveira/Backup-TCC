@@ -63,6 +63,13 @@ div[vw] .access-button {
     right: auto !important;
 }
 
+/* Altera a cor do ícone do UserWay para branco */
+#userwayAccessibilityIcon .userway_icon {
+    filter: brightness(0) invert(1) !important;
+    -webkit-filter: brightness(0) invert(1) !important;
+}
+
+
 /* ------------------------------
 NAVBAR
 --------------------------------*/
