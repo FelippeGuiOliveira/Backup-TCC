@@ -1875,3 +1875,28 @@ ESG SHOWCASE CAROUSEL
     background: #0f9f59;
     transform: translateY(-3px);
 }
+
+/* ------------------------------
+    BOTÃO DE LOGOUT (PERFIL)
+--------------------------------*/
+.btn-logout {
+    background: #ef4444; /* Vermelho */
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.15);
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    display: inline-block;
+}
+
+.btn-logout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.2);
+    background: #dc2626; /* Vermelho mais escuro */
+}
