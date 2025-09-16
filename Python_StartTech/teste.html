@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Gráfico TI - Datasets dinâmicos</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    #tiChart {
+      max-height: 400px;
+    }
+
+    .form-section {
+      margin-top: 30px;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0 2px;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    button {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Gráfico de Equipamentos (TI)</h1>
+  <canvas id="tiChart"></canvas>
+
+  <!-- Botões de Download -->
+  <br>
+  <button id="downloadChart">Baixar Gráfico (PNG)</button>
+  <!-- Ícone para download PDF -->
+  <button id="downloadPDF" title="Baixar PDF">
+    <img src="pdf-icon.png" alt="PDF">
+  </button>
+
+  <!-- Ícone para download JPG -->
+  <button id="downloadJPG" title="Baixar JPG">
+    <img src="jpg-icon.png" alt="JPG">
+  </button>
+
+  <div class="form-section">
+    <h2>Adicionar novo dataset (barra)</h2>
+    <label for="categoria">Nome (label):</label>
+    <input type="text" id="categoria" placeholder="Ex: Doado">
+
+    <label for="reuso">Reuso:</label>
+    <input type="number" id="reuso" placeholder="Ex: 5">
+
+    <label for="descarte">Descarte:</label>
+    <input type="number" id="descarte" placeholder="Ex: 5">
+
+    <label for="cor">Cor da Barra:</label>
+    <input type="color" id="cor" value="#f59e0b">
+
+    <br>
+    <button id="addBar">Adicionar Barra</button>
+  </div>
+
+  <script>
+    const charts = {};
+
+    const tiCtx = document.getElementById('tiChart').getContext('2d');
+    charts.ti = new Chart(tiCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Reutilizados', 'Descartados'],
+        datasets: [
+          {
+            label: 'Exemplo',
+            data: [10, 15],
+            backgroundColor: '#3b82f6'
+          },
+          {
+            label: 'teste2',
+            data: [10, 15],
+            backgroundColor: '#f87171'
+          },
+          {
+            label: 'teste3',
+            data: [10, 15],
+            backgroundColor: '#34d399'
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right'
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Adicionar nova barra
+    document.getElementById('addBar').addEventListener('click', () => {
+      const nome = document.getElementById('categoria').value.trim();
+      const reuso = parseFloat(document.getElementById('reuso').value);
+      const descarte = parseFloat(document.getElementById('descarte').value);
+      const cor = document.getElementById('cor').value;
+
+      if (!nome || isNaN(reuso) || isNaN(descarte)) {
+        alert('Insira um nome e valores numéricos válidos para Reuso e Descarte.');
+        return;
+      }
+
+      charts.ti.data.datasets.push({
+        label: nome,
+        data: [reuso, descarte],
+        backgroundColor: cor
+      });
+
+      charts.ti.update();
+
+      document.getElementById('categoria').value = '';
+      document.getElementById('reuso').value = '';
+      document.getElementById('descarte').value = '';
+    });
+
+    // Download PNG (nativo)
+    document.getElementById('downloadChart').addEventListener('click', () => {
+      const imageURL = charts.ti.toBase64Image();
+      const link = document.createElement('a');
+      link.href = imageURL;
+      link.download = 'grafico-ti.png';
+      link.click();
+    });
+
+    // Download JPG com html2canvas
+    document.getElementById('downloadJPG').addEventListener('click', () => {
+      const chartCanvas = document.getElementById('tiChart');
+      html2canvas(chartCanvas).then(canvas => {
+        const imageURL = canvas.toDataURL('image/jpeg', 1.0);
+        const link = document.createElement('a');
+        link.href = imageURL;
+        link.download = 'grafico-ti.jpg';
+        link.click();
+      });
+    });
+
+    // Download PDF com html2canvas + jsPDF
+    document.getElementById('downloadPDF').addEventListener('click', async () => {
+      const chartCanvas = document.getElementById('tiChart');
+      const canvas = await html2canvas(chartCanvas);
+      const imgData = canvas.toDataURL('image/png');
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'pt',
+        format: [canvas.width, canvas.height]
+      });
+
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('grafico-ti.pdf');
+    });
+  </script>
+
+</body>
+
+</html>
