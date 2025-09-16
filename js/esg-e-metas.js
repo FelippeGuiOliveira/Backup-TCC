@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
             id: editingGoalId || Date.now(), 
             title: document.getElementById('goal-title').value, 
             description: document.getElementById('goal-description').value, 
-            progress: parseInt(document.getElementById('goal-progress').value), 
-            deadline: parseInt(document.getElementById('goal-deadline').value), 
+            progress: Number(document.getElementById('goal-progress').value), 
+            deadline: Number(document.getElementById('goal-deadline').value), 
             category: categorySelect.value 
         };
         if (editingGoalId) { 
@@ -159,13 +159,13 @@ document.addEventListener('DOMContentLoaded', () => {
     goalsContainer.addEventListener('click', (e) => {
         const editBtn = e.target.closest('.edit-btn');
         if(editBtn) { 
-            const goalId = parseInt(editBtn.closest('.goal-card').dataset.id);
+            const goalId = Number(editBtn.closest('.goal-card').dataset.id);
             const goalToEdit = goals.find(g => g.id === goalId);
             openGoalModal(goalToEdit); 
         }
         const deleteBtn = e.target.closest('.delete-btn');
         if(deleteBtn && confirm('Tem certeza que deseja excluir esta meta?')) {
-            const goalId = parseInt(deleteBtn.closest('.goal-card').dataset.id);
+            const goalId = Number(deleteBtn.closest('.goal-card').dataset.id);
             goals = goals.filter(g => g.id !== goalId);
             saveGoals(); renderGoals();
         }
