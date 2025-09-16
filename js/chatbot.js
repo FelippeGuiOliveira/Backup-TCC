@@ -423,6 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let messages = [{ role: "system", content: systemPrompt }, ...chatHistory];
 
+        
         if (file) {
             try {
                 // Para simplificar, vamos apenas informar a IA sobre o arquivo.
