@@ -139,7 +139,7 @@ export function initSaveDashboardButton() {
                         charts.ti.data.datasets.push({
                             label: nomeEquipamento,
                             data: [tiReused, tiDiscarded],
-                            backgroundColor: `rgba(${r}, ${g}, ${b}, 0.5)`,
+                            backgroundColor: `rgba(${r}, ${g}, ${b}, 1)`,
                             borderColor: `rgba(${r}, ${g}, ${b}, 1)`,
                             borderWidth: 2
                         });
