@@ -95,6 +95,9 @@ body {
       border-radius: 16px;
       padding: 2rem;
       border: 1px solid #e5e7eb;
+      display: flex; /* Adiciona display flex */
+      flex-direction: column; /* Organiza os itens em coluna */
+      align-items: center; /* Centraliza os itens horizontalmente */
     }
 
     .profile-container .profile-card-header {
@@ -104,6 +107,8 @@ body {
       padding-bottom: 2rem;
       margin-bottom: 2rem;
       border-bottom: 1px solid #e5e7eb;
+      width: 100%; /* Garante que o header ocupe toda a largura */
+
     }
 
     .avatar {
@@ -152,6 +157,7 @@ body {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
+      width: 100%; /* Garante que o corpo ocupe toda a largura */
     }
 
     .info-field label {

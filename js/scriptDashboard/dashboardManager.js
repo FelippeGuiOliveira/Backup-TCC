@@ -45,9 +45,9 @@ function updateUI(year, monthName) {
     const chartTitleWithYear = `${monthName} ${year}`;
 
     // 1. Energia
+    const totalConsumoEnergia = monthData.energia.equipamentos.reduce((acc, curr) => acc + (curr.consumo || 0), 0);
+    if (summary.length > 0) summary[0].textContent = `${totalConsumoEnergia.toFixed(0)} kWh`;
     if (charts.energy) {
-        const totalConsumoEnergia = monthData.energia.equipamentos.reduce((acc, curr) => acc + (curr.consumo || 0), 0);
-        if (summary.length > 0) summary[0].textContent = `${totalConsumoEnergia.toFixed(0)} kWh`;
         charts.energy.data.labels = monthData.energia.equipamentos.map(e => e.nome);
         charts.energy.data.datasets[0].data = monthData.energia.equipamentos.map(e => e.consumo);
         charts.energy.options.plugins.title.text = chartTitleWithYear;
@@ -55,8 +55,9 @@ function updateUI(year, monthName) {
     }
 
     // 2. Água (Anual)
+    const consumoTotalAgua = monthData.agua.consumoTotal || 0;
+    if (summary.length > 1) summary[1].textContent = `${consumoTotalAgua.toLocaleString('pt-BR')} m³`;
     if (charts.water) {
-        if (summary.length > 1) summary[1].textContent = `${monthData.agua.consumoTotal.toLocaleString('pt-BR')} m³`;
         monthNames.forEach((mName, index) => {
             const dataOfMonth = yearData[mName]?.agua || { consumoReal: 0, consumoTotal: 0, custoTotal: 0, valorEconomizado: 0 };
             charts.water.data.datasets[0].data[index] = dataOfMonth.consumoReal;
@@ -69,17 +70,18 @@ function updateUI(year, monthName) {
     }
 
     // 3. Resíduos
+    const taxaReciclagem = monthData.residuos.taxaReciclagem || 0;
+    if (summary.length > 2) summary[2].textContent = `${taxaReciclagem.toFixed(0)}%`;
     if (charts.waste) {
-        if (summary.length > 2) summary[2].textContent = `${monthData.residuos.taxaReciclagem.toFixed(0)}%`;
         charts.waste.data.datasets[0].data = [monthData.residuos.reciclavel, monthData.residuos.organico, monthData.residuos.rejeito];
         charts.waste.options.plugins.title.text = chartTitleWithYear;
         charts.waste.update();
     }
 
     // 4. TI
+    const totalReaproveitados = monthData.ti.equipamentos.reduce((acc, curr) => acc + (curr.reaproveitados || 0), 0);
+    if (summary.length > 3) summary[3].textContent = totalReaproveitados;
     if (charts.ti) {
-        const totalReaproveitados = monthData.ti.equipamentos.reduce((acc, curr) => acc + (curr.reaproveitados || 0), 0);
-        if (summary.length > 3) summary[3].textContent = totalReaproveitados;
         charts.ti.data.datasets = monthData.ti.equipamentos.length > 0
             ? monthData.ti.equipamentos.map(equip => ({
                 label: equip.nome,
@@ -177,7 +179,7 @@ export function initDashboardManager() {
             if (confirm(`Tem certeza que deseja limpar os dados de "${chartKey}" para ${monthName} de ${year}?`)) {
                 const monthData = getMonthData(year, monthName);
                 const dbKey = chartKey === 'energy' ? 'energia' : chartKey === 'water' ? 'agua' : chartKey === 'waste' ? 'residuos' : 'ti';
-                
+
                 // Reseta a categoria para o estado inicial
                 const initialState = {
                     energia: { equipamentos: [], totalConsumo: 0 },

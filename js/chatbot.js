@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 goalsToAdd.push(...pendingGoals);
             } else if (action.startsWith('meta-')) {
                 const index = parseInt(action.split('-')[1], 10) - 1;
-                if (pendingGoals[index]) {
+                if (pendingGoals[index]) {''
                     goalsToAdd.push(pendingGoals[index]);
                 }
             }
